@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#ffffff">
+    <include layout="@layout/toolbar_two"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#1e2432"
+        android:letterSpacing="-0.02"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/poppins_black"
+        android:lineSpacingExtra="9sp"
+        android:text="Recommended Dish"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="131.5dp"
+        android:layout_margin="20dp"
+        android:background="#ffffff"
+        android:id="@+id/layout1">
+
+
+        <FrameLayout
+            android:layout_width="90dp"
+            android:layout_height="110dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/tripImage"
+                android:layout_width="90dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="@drawable/scrambledegg" />
+
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/trip_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:letterSpacing="-0.02"
+                    android:lineSpacingExtra="6sp"
+                    android:text="Scrambeled Egg"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+
+                <RatingBar
+                    android:id="@+id/RatingBar_Id"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="1"
+                    android:progressTint="#f15421"
+                    android:rating="4" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.4dp"
+                    android:letterSpacing="-0.01"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Chef's Top Pick!"
+                    android:textColor="#f15421"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:letterSpacing="-0.01"
+
+                    android:lineSpacingExtra="4sp"
+                    android:text="Time"
+                    android:textColor="#bec2ce"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/trip_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.4dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:letterSpacing="-0.01"
+                    android:lineSpacingExtra="0sp"
+                    android:text="+ - 30 Min"
+                    android:textColor="#1f2533"
+                    android:textSize="18sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="end"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="131.5dp"
+    android:layout_margin="20dp"
+    android:background="#ffffff"
+    android:id="@+id/layout2">
+
+    <FrameLayout
+        android:layout_width="90dp"
+        android:layout_height="110dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imgstk"
+            android:layout_width="90dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/steakrizki" />
+
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/steakva"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:letterSpacing="-0.02"
+                android:lineSpacingExtra="6sp"
+                android:text="Steak"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+
+            <RatingBar
+                android:id="@+id/Rating_d"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="1"
+                android:progressTint="#f15421"
+                android:rating="4" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.4dp"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="4sp"
+                android:text="Chef's Top Pick!"
+                android:textColor="#f15421"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:letterSpacing="-0.01"
+
+                android:lineSpacingExtra="4sp"
+                android:text="Time"
+                android:textColor="#bec2ce"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/trip_pric"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8.4dp"
+                android:fontFamily="@font/poppins_bold"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="0sp"
+                android:text="+ - 1 Hour"
+                android:textColor="#1f2533"
+                android:textSize="18sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="end"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="131.5dp"
+        android:layout_margin="20dp"
+        android:background="#ffffff"
+        android:id="@+id/layout3">
+
+        <FrameLayout
+            android:layout_width="90dp"
+            android:layout_height="110dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imgsnk"
+                android:layout_width="90dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="@drawable/snackpic" />
+
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/nachva"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:letterSpacing="-0.02"
+                    android:lineSpacingExtra="6sp"
+                    android:text="Nachos"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+
+                <RatingBar
+                    android:id="@+id/RatingBar_d"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="1"
+                    android:progressTint="#f15421"
+                    android:rating="4" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.4dp"
+                    android:letterSpacing="-0.01"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Chef's Top Pick!"
+                    android:textColor="#f15421"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:letterSpacing="-0.01"
+
+                    android:lineSpacingExtra="4sp"
+                    android:text="Time"
+                    android:textColor="#bec2ce"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/trip_prc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.4dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:letterSpacing="-0.01"
+                    android:lineSpacingExtra="0sp"
+                    android:text="+ - 15 Min"
+                    android:textColor="#1f2533"
+                    android:textSize="18sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="end"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="131.5dp"
+        android:layout_margin="20dp"
+        android:background="#ffffff"
+        android:id="@+id/layout4">
+
+        <FrameLayout
+            android:layout_width="90dp"
+            android:layout_height="110dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imgst"
+                android:layout_width="90dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="@drawable/roastedchic" />
+
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/steaka"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:letterSpacing="-0.02"
+                    android:lineSpacingExtra="6sp"
+                    android:text="Roasted Chicken"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+
+                <RatingBar
+                    android:id="@+id/RatinBar_d"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="1"
+                    android:progressTint="#f15421"
+                    android:rating="4" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.4dp"
+                    android:letterSpacing="-0.01"
+                    android:lineSpacingExtra="4sp"
+                    android:text="Chef's Top Pick!"
+                    android:textColor="#f15421"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:letterSpacing="-0.01"
+
+                    android:lineSpacingExtra="4sp"
+                    android:text="Time"
+                    android:textColor="#bec2ce"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/trip_pc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.4dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:letterSpacing="-0.01"
+                    android:lineSpacingExtra="0sp"
+                    android:text="+ - 1-1.5 Hour"
+                    android:textColor="#1f2533"
+                    android:textSize="18sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="end"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>

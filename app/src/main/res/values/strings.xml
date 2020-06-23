@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">GoCook</string>
+    <string name="Steak_Ingridient">1 - 2 boneless ribeye or scotch fillet 2.5 cm / 1thick approx 300g/10 oz each\n 1 tbsp vegetable oil\n
+        Salt and pepper 75g \n
+        5 tbsp unsalted butter\n
+        cut into 1.25cm / 1/2 cubes\n
+        6 sprigs fresh thyme or 3 sprigs rosemary\n
+        5 garlic cloves
+peeled and smashed to split</string>
+    <string name="how_tocooksteak" >
+        Bring to room temp: Take the steak out of the fridge 30 minutes prior to bring to room temperature.\n
+        Dry steaks: Pat dry with paper towels.\n
+        Heat skillet: Heat oil in a heavy based skillet over high heat until it is very hot - you should see smoke!\n
+        Season: Sprinkle each side of the steak generously with salt and pepper, then immediately place in the skillet.\n
+        Sear Side 1: Cook for 2 - 2.5 minutes until you get a great crust, then turn.\n
+        Garlic Butter: Leave for 1 minute, then push steaks to one side and toss in butter, garlic and thyme. BE CAREFUL - the thyme will sputter!\n
+        Baste: As soon as the butter is melted, continuously spoon the butter over the steak until it\s cooked to your liking - 2 minutes in total for the 2nd side for medium rare (52C/125F, chart below for other doneness temps)\n
+        Basting also renders fat on the side of the steak – use tongs to sear the edges at the end if you want it browned more.\n
+        Rest: Transfer steak to a plate and cover loosely with foil, rest for 5 to 10 minutes.
+    </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Scrambledeggsingredient">2 large eggs\n
+0.5 tbsp whole milk or water\n
+Shredded or crumbled cheese, optional\n
+Salt and pepper\n
+Nonstick cooking oil spray, olive oil, or butter, or a combination\n</string>
+    <string name="scrambledeggshowto">1. Lightly whisk 2 large eggs, 6 tbsp single cream or full cream milk and a pinch of salt together until the mixture has just one consistency. \n
+
+2.Heat a small non-stick frying pan for a minute or so, then add a knob of butter and let it melt. Don’t allow the butter to brown or it will discolour the eggs.\n
+
+3.Pour in the egg mixture and let it sit, without stirring, for 20 seconds. Stir with a wooden spoon, lifting and folding it over from the bottom of the pan.\n
+
+4.Let it sit for another 10 seconds then stir and fold again.\n
+
+5.Repeat until the eggs are softly set and slightly runny in places. Remove from the heat and leave for a moment to finish cooking.\n
+
+6.Give a final stir and serve the velvety scramble without delay.\n
+
+</string>
+    <string name="roastchic">1 whole fryer chicken \n
+1 1/2 teaspoons salt \n
+1 teaspoon dried basil \n
+1 teaspoon dried oregano \n
+1 teaspoon paprika \n
+1/2 teaspoon white pepper \n
+1/2 teaspoon onion powder \n
+1/4 cup softened salted butter \n
+1 large lemon \n
+2 sprigs fresh rosemary</string>
+    <string name="roastchichow">Remove chicken from packaging and pat dry using paper towels. Remove any giblets and the neck (if included)..\n
+In a small bowl, stir together salt, basil, oregano, paprika, white pepper, and onion powder. \n
+        In another small bowl, use a fork to mash softened butter together with 2 teaspoons of the seasoning mixture.\n
+Loosen up the skin on the chicken. You’ll be able to slide your fingers under the skin at the openings.\n
+        Wiggle your fingers in and slide them all around to loosen that skin right up. Place butter mixture underneath skin.\n
+
+Cut the lemon in half and squeeze the juices directly over the chicken skin.\n Sprinkle remaining seasoning mixture over the skin to coat. Place the lemon halves and rosemary sprigs inside the cavity of the chicken.\n
+Place chicken breast side up in a roasting pan.\n Roast for 20 minutes at 450 degrees, then reduce the temperature to 350 degrees and continue roasting for about another 40 minutes.\n Baste every 20 minutes, if desired.
+Remove from the oven when the internal temperature reaches 165 degrees.\n Use a meat thermometer to check right where the leg connects to the body.\n Let it rest for about 20 minutes before carving.</string>
+    <string name="ingnachos">FOR THE NACHOS \n
+1 tbsp. extra-virgin olive oil\n
+1 large onion, chopped\n
+1 lb. ground beef\n
+2 garlic cloves, minced\n
+1 tbsp. taco seasoning\n
+kosher salt\n
+1 (15-oz.) can refried beans\n
+1/4 c. water\n
+1 large bag tortilla chips\n
+2 c. shredded cheddar\n
+2 c. Shredded Monterey jack\n
+1 (15-oz.) can black beans, drained\n
+1/2 c. pickled jalapeños\n
+FOR TOPPING\n
+1 large tomato, diced\n
+1 avocado, diced\n
+1/4 c. thinly sliced green onions\n
+1/4 c. fresh cilantro leaves (optional)\n
+Sour cream, for drizzling\n
+Hot sauce, for drizzling</string>
+    <string name="howtonachos">
+        1. Preheat oven to 425º and line a large baking sheet with foil. In a large skillet over medium heat, heat oil. Add onion and cook until soft, 5 minutes, then add ground beef and cook until no longer pink, 6 minutes more. Drain fat. \n
+2. Add garlic and taco seasoning and season with salt. Cook until meat is well browned and slightly crispy, 5 minutes more. Add refried beans and water to skillet and stir until combined. \n
+3. Add half the tortilla chips and top with beef-bean mixture, half the cheese, half the black beans, and half the pickled jalapeños. Repeat one more layer. \n
+4. Bake until cheese is melty, 15 minutes.\n
+5. Scatter with tomato, avocado, green onions, and cilantro. Drizzle with sour cream and hot sauce and serve immediately.
+    </string>
+</resources>
