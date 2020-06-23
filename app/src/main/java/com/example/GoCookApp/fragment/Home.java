@@ -64,7 +64,6 @@ public class Home extends Fragment {
         for (int i = 0; i < homeimage1.length; i++) {
             HomeREPO homeREPO = new HomeREPO(homeimage1[i], title[i], cat[i],cookt[i]);
             arrayList.add(homeREPO);
-            Log.d("test", "onViewCreated() called with: view = [" + view + "], savedInstanceState = [" + savedInstanceState + "]");
         }
 
         adapter = new HomeRecyclerAdapter(getContext(), arrayList);
