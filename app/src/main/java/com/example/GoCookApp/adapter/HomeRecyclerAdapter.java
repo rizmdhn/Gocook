@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.GoCookApp.R;
 import com.example.GoCookApp.REPO.HomeREPO;
 import com.example.GoCookApp.activity.Steakactivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,6 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_homerecyclerview, viewGroup, false);
         return new MyViewHolder(view);
     }
@@ -40,7 +40,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
 
         HomeREPO homeREPO = list.get(i);
 
-        myViewHolder.imageView.setImageResource(homeREPO.getImages());
+        Picasso.with(context).load(homeREPO.getImages()).into(myViewHolder.imageView);
         myViewHolder.title.setText(homeREPO.getTitles());
         myViewHolder.categories.setText(homeREPO.getCat());
         myViewHolder.cookt.setText(homeREPO.getCookt());

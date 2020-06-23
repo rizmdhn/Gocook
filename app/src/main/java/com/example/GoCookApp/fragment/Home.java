@@ -22,6 +22,11 @@ import com.example.GoCookApp.activity.Scrambledeggs;
 import com.example.GoCookApp.activity.Steakactivity;
 import com.example.GoCookApp.activity.ViewallActivity;
 import com.example.GoCookApp.adapter.HomeRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -29,12 +34,13 @@ import java.util.ArrayList;
 public class Home extends Fragment {
 
 
-    Integer[] homeimage1 = {R.drawable.scrambledegg, R.drawable.steak2};
-    String[] title = {"scrambled egg", "steak"};
-    String[] cat = {"breakfast", "dinner"};
-    String[] cookt = {"10 minutes", "1 hour"};
+
+    ArrayList homeimage1 = new ArrayList<>();
+    ArrayList Title = new ArrayList<>();
+    ArrayList Cat = new ArrayList<>();
+    ArrayList Cookt = new ArrayList<>();
+
     ArrayList<HomeREPO> arrayList;
-    ArrayList<HomeREPO> arrayList1;
     HomeRecyclerAdapter adapter;
     private RecyclerView recyclerview;
     private TextView search_layout;
@@ -44,30 +50,57 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.home, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
         recyclerview = view.findViewById(R.id.recyclerview);
         RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerview.setLayoutManager(layoutManager1);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.setNestedScrollingEnabled(false);
+        Log.i("test", "ini cek sebelum for");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Recipe");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i("test2", "ini udah masuk snapshot");
+                for(DataSnapshot test : snapshot.getChildren()){
+                     Log.i("test3", "ini udah masuk for");
+                    String image1 = test.child("image").getValue(String.class);
+                    String title = test.child("title").getValue(String.class);
+                    String cat = test.child("categories").getValue(String.class);
+                    String cook = test.child("cooktime").getValue(String.class);
+                    Log.i("test3", image1);
+                    Log.i("test3", title);
+                    Log.i("test3", cat);
+                    homeimage1.add(image1);
+                    Title.add(title);
+                    Cat.add(cat);
+                    Cookt.add(cook);
 
 
-        arrayList = new ArrayList<>();
+                }
 
+                arrayList = new ArrayList<>();
 
-        for (int i = 0; i < homeimage1.length; i++) {
-            HomeREPO homeREPO = new HomeREPO(homeimage1[i], title[i], cat[i],cookt[i]);
-            arrayList.add(homeREPO);
-        }
+                for (int i = 0; i < 3; i++) {
+                    HomeREPO homeREPO = new HomeREPO(homeimage1.get(i).toString(), Title.get(i).toString(), Cat.get(i).toString(),Cookt.get(i).toString());
+                    arrayList.add(homeREPO);
+                }
 
-        adapter = new HomeRecyclerAdapter(getContext(), arrayList);
-        recyclerview.setAdapter(adapter);
+                adapter = new HomeRecyclerAdapter(getContext(), arrayList);
+                recyclerview.setAdapter(adapter);
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         egg = view.findViewById(R.id.eggpic);
         steak = view.findViewById(R.id.steakpic);

@@ -2,7 +2,7 @@ package com.example.GoCookApp.REPO;
 
 public class HomeREPO {
 
-    int images;
+    String images;
     String titles, cat, cookt;
 
     public String getTitles() {
@@ -29,7 +29,7 @@ public class HomeREPO {
         this.cookt = cookt;
     }
 
-    public HomeREPO(int images, String titles, String cat, String cookt) {
+    public HomeREPO(String images, String titles, String cat, String cookt) {
         this.images = images;
         this.titles = titles;
         this.cat = cat;
@@ -37,11 +37,11 @@ public class HomeREPO {
 
     }
 
-    public int getImages() {
+    public String getImages() {
         return images;
     }
 
-    public void setImages(int images) {
+    public void setImages(String images) {
         this.images = images;
     }
 }
