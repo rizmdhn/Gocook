@@ -1,11 +1,9 @@
 package com.example.GoCookApp.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.GoCookApp.R;
 import com.example.GoCookApp.REPO.MenuREPO;
 import com.example.GoCookApp.adapter.NachosRecyclerviewadapter;
-import com.example.GoCookApp.adapter.ScrambleRecyclerviewadapter;
+
 
 import java.util.ArrayList;
 
@@ -29,6 +27,7 @@ public class SnackFragment extends Fragment {
     ArrayList<MenuREPO> arrayList;
     private RecyclerView trip_recyclerview;
     private NachosRecyclerviewadapter recyclerviewadapter;
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
