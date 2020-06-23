@@ -2,6 +2,7 @@ package com.example.GoCookApp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class Home extends Fragment {
         for (int i = 0; i < homeimage1.length; i++) {
             HomeREPO homeREPO = new HomeREPO(homeimage1[i], title[i], cat[i],cookt[i]);
             arrayList.add(homeREPO);
+            Log.d("test", "onViewCreated() called with: view = [" + view + "], savedInstanceState = [" + savedInstanceState + "]");
         }
 
         adapter = new HomeRecyclerAdapter(getContext(), arrayList);
