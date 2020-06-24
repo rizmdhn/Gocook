@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.GoCookApp.R;
 import com.example.GoCookApp.activity.MasterActivity;
-import com.example.GoCookApp.fragment.DinnerFragment;
+import com.example.GoCookApp.fragment.DessertFragment;
 
 public class DinnerMenuActivity extends AppCompatActivity {
 
@@ -19,7 +19,7 @@ public class DinnerMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        loadFragment(new DinnerFragment());
+        loadFragment(new DessertFragment());
         ImageView img = findViewById(R.id.backbutton);
         img.setOnClickListener(new View.OnClickListener() {
             @Override

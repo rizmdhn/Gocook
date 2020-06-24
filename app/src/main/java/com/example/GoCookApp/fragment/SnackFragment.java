@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -51,9 +52,10 @@ public class SnackFragment extends Fragment {
         Log.i("1", "success oncreate");
 
         // this is firebase
-            database = FirebaseDatabase.getInstance();
-            myRef = database.getReference("Recipe");
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef = FirebaseDatabase.getInstance().getReference();
+        Query Snackquery = myRef.child("Recipe").orderByChild("categories")
+                .equalTo("Snacks");
+        Snackquery.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     Log.i("test", "success eventlistener");

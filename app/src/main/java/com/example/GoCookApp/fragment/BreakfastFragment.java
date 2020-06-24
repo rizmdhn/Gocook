@@ -21,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -52,9 +53,10 @@ public class BreakfastFragment extends Fragment {
 
 
         // this is firebase
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Recipe");
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef = FirebaseDatabase.getInstance().getReference();
+        Query Breakfastquery = myRef.child("Recipe").orderByChild("categories")
+                .equalTo("Breakfast");
+        Breakfastquery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()) {
