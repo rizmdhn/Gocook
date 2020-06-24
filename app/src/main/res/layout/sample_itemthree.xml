@@ -37,7 +37,7 @@
             android:layout_marginTop="13.3dp"
             android:textColor="#1e2432"
             android:lineSpacingExtra="9sp"
-            android:text="Dinner"
+            android:text="Dessert"
             />
 
 
