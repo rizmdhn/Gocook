@@ -1,6 +1,7 @@
 package com.example.GoCookApp.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +16,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.GoCookApp.R;
 import com.example.GoCookApp.REPO.MenuREPO;
 import com.example.GoCookApp.adapter.NachosRecyclerviewadapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
 
 public class SnackFragment extends Fragment {
 
-    int[] image = {R.drawable.snackpic,R.drawable.mac,R.drawable.potato,R.drawable.salad};
-    String[] title = {"Nachos","Mac & Cheese", "Potato Wedges", "Mediteranian Salad"};
-    String[] price = {"+ - 15 Min","+ - 45 Min","+ - 30 Min","+ - 15 Min"};
+
     ArrayList<MenuREPO> arrayList;
     private RecyclerView trip_recyclerview;
     private NachosRecyclerviewadapter recyclerviewadapter;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    ArrayList myrecipedataimage = new ArrayList<>();
+    ArrayList myrecipedatatitle = new ArrayList<>();
+    ArrayList myrecipedatacooktime = new ArrayList<>();
 
 
     @Override
@@ -39,15 +48,46 @@ public class SnackFragment extends Fragment {
         trip_recyclerview.setLayoutManager(layoutManager1);
         trip_recyclerview.setItemAnimator(new DefaultItemAnimator());
         trip_recyclerview.setNestedScrollingEnabled(false);
+        Log.i("1", "success oncreate");
+
+        // this is firebase
+            database = FirebaseDatabase.getInstance();
+            myRef = database.getReference("Recipe");
+        myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Log.i("test", "success eventlistener");
+
+                    for(DataSnapshot ds : snapshot.getChildren()) {
+                        Log.i("test", "success for");
+
+                        String image = ds.child("image").getValue(String.class);
+                        String title = ds.child("title").getValue(String.class);
+                        String cooktime = ds.child("cooktime").getValue(String.class);
+                        myrecipedataimage.add(image);
+                        myrecipedatatitle.add(title);
+                        myrecipedatacooktime.add(cooktime);
+                        Log.i("halo", String.valueOf(myrecipedatatitle));
+                    }
+                    for (int i = 0; i < myrecipedatatitle.size(); i++) {
+
+                        MenuREPO menuREPO = new MenuREPO( myrecipedataimage.get(i).toString(),myrecipedatatitle.get(i).toString(),myrecipedatacooktime.get(i).toString());
+
+                        arrayList.add(menuREPO);
+                    }
+                }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         arrayList = new ArrayList<>();
 
 
-        for (int i = 0; i < image.length; i++) {
-            MenuREPO menuREPO = new MenuREPO(image[i],title[i],price[i]);
-            arrayList.add(menuREPO);
-        }
+
         recyclerviewadapter = new NachosRecyclerviewadapter(getContext(), arrayList);
         trip_recyclerview.setAdapter(recyclerviewadapter);
     }

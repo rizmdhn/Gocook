@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.GoCookApp.R;
 import com.example.GoCookApp.REPO.MenuREPO;
 import com.example.GoCookApp.activity.NachoActivity;
+import com.squareup.picasso.Picasso;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 public class NachosRecyclerviewadapter extends RecyclerView.Adapter<NachosRecyclerviewadapter.ViewHolder> {
@@ -41,7 +43,7 @@ public class NachosRecyclerviewadapter extends RecyclerView.Adapter<NachosRecycl
 
         MenuREPO menuREPO = list.get(i);
 
-        viewHolder.tripImage.setImageResource(menuREPO.getImage());
+        Picasso.with(context).load(menuREPO.getImage()).into(viewHolder.tripImage);
         viewHolder.trip_title.setText(menuREPO.getTitile());
         viewHolder.trip_price.setText(menuREPO.getPrice());
         viewHolder.tripImage.setOnClickListener(new View.OnClickListener() {

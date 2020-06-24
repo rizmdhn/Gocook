@@ -61,22 +61,17 @@ public class Home extends Fragment {
         recyclerview.setLayoutManager(layoutManager1);
         recyclerview.setItemAnimator(new DefaultItemAnimator());
         recyclerview.setNestedScrollingEnabled(false);
-        Log.i("test", "ini cek sebelum for");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Recipe");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.i("test2", "ini udah masuk snapshot");
                 for(DataSnapshot test : snapshot.getChildren()){
-                     Log.i("test3", "ini udah masuk for");
                     String image1 = test.child("image").getValue(String.class);
                     String title = test.child("title").getValue(String.class);
                     String cat = test.child("categories").getValue(String.class);
                     String cook = test.child("cooktime").getValue(String.class);
-                    Log.i("test3", image1);
-                    Log.i("test3", title);
-                    Log.i("test3", cat);
+
                     homeimage1.add(image1);
                     Title.add(title);
                     Cat.add(cat);

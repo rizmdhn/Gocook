@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.GoCookApp.R;
 import com.example.GoCookApp.REPO.MenuREPO;
 import com.example.GoCookApp.activity.Steakactivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -40,8 +41,8 @@ public class SteakRecyclerviewadapter extends RecyclerView.Adapter<SteakRecycler
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
         MenuREPO menuREPO = list.get(i);
+        Picasso.with(context).load(menuREPO.getImage()).into(viewHolder.tripImage);
 
-        viewHolder.tripImage.setImageResource(menuREPO.getImage());
         viewHolder.trip_title.setText(menuREPO.getTitile());
         viewHolder.trip_price.setText(menuREPO.getPrice());
         viewHolder.tripImage.setOnClickListener(new View.OnClickListener() {

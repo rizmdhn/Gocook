@@ -2,21 +2,21 @@ package com.example.GoCookApp.REPO;
 
 public class MenuREPO {
 
-    int Image;
+    String Image;
     String titile;
     String price;
 
-    public MenuREPO(int image, String titile, String price) {
+    public MenuREPO(String image, String titile, String price) {
         Image = image;
         this.titile = titile;
         this.price = price;
     }
 
-    public int getImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         Image = image;
     }
 

@@ -26,10 +26,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c87b51d2-ccaf-4274-9df7-33c6f64f0cdb" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_auth_interop_18_0_0_aar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_database_19_3_1_aar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_database_collection_17_0_1_aar.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_2_5_2_jar.xml" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_picasso_picasso_1_0_0_jar.xml" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -44,11 +48,19 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/REPO/HomeREPO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/REPO/HomeREPO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/activity/MasterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/activity/MasterActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/adapter/HomeRecyclerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/adapter/HomeRecyclerAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/fragment/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/fragment/Home.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/REPO/MenuREPO.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/REPO/MenuREPO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/adapter/NachosRecyclerviewadapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/adapter/NachosRecyclerviewadapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/fragment/LunchFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/fragment/LunchFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/fragment/SnackFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/GoCookApp/fragment/SnackFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/categories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/categories.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +68,10 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< Updated upstream
   <component name="ExecutionTargetManager" SELECTED_TARGET="5200564aee745403" />
+=======
+>>>>>>> Stashed changes
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -110,6 +125,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="CREATE_PULL_REQUEST_DEFAULT_BRANCH" value="master" />
+    <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_USER" value="rizmdhn" />
+    <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_NAME" value="Gocook" />
   </component>
   <component name="ProjectId" id="1ZX6W0jEMQbnCY8lPJXYIruu1iG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -362,12 +383,21 @@
       <option name="project" value="LOCAL" />
       <updated>1592922752971</updated>
     </task>
+<<<<<<< Updated upstream
     <task id="LOCAL-00008" summary="test">
       <created>1592923213753</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
       <updated>1592923213753</updated>
+=======
+    <task id="LOCAL-00008" summary="update gradle">
+      <created>1592925682005</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1592925682005</updated>
+>>>>>>> Stashed changes
     </task>
     <option name="localTasksCounter" value="9" />
     <servers />
@@ -414,7 +444,8 @@
     <MESSAGE value="ui 07-aug-19" />
     <MESSAGE value="add database" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="update gradle" />
+    <option name="LAST_COMMIT_MESSAGE" value="update gradle" />
   </component>
   <component name="masterDetails">
     <states>

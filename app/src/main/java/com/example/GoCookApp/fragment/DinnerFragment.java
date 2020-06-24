@@ -2,6 +2,7 @@ package com.example.GoCookApp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +18,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.GoCookApp.R;
 import com.example.GoCookApp.REPO.MenuREPO;
 import com.example.GoCookApp.adapter.ChickenRecyclerviewadapter;
+import com.example.GoCookApp.adapter.NachosRecyclerviewadapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class DinnerFragment extends Fragment {
 
-    int[] image = {R.drawable.roastedchic,R.drawable.salmon,R.drawable.noodle,R.drawable.ribss};
-    String[] title = {"Roasted Chicken","Salmon Steak","Soba Noodle","BBQ Ribs"};
-    String[] price = {"+ - 1-1.5 Hour","+ - 45 Min","+ - 35 Min","+ - 3 Hour"};
     ArrayList<MenuREPO> arrayList;
     private RecyclerView trip_recyclerview;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    private ArrayList myrecipedataimage = new ArrayList<>();
+    private ArrayList myrecipedatatitle = new ArrayList<>();
+    private ArrayList myrecipedatacooktime = new ArrayList<>();
     private ChickenRecyclerviewadapter recyclerviewadapter;
 
     @Override
@@ -42,12 +51,37 @@ public class DinnerFragment extends Fragment {
 
 
         arrayList = new ArrayList<>();
+// this is firebase
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("Recipe");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    String image = ds.child("image").getValue(String.class);
+                    String title = ds.child("title").getValue(String.class);
+                    String cooktime = ds.child("cooktime").getValue(String.class);
+                    myrecipedataimage.add(image);
+                    myrecipedatatitle.add(title);
+                    myrecipedatacooktime.add(cooktime);
+                }
+                for (int i = 0; i < myrecipedatacooktime.size(); i++) {
+                    String recimg = myrecipedataimage.get(i).toString();
 
+                    String rectit = myrecipedatatitle.get(i).toString();
+                    String recct = myrecipedatacooktime.get(i).toString();
+                    MenuREPO menuREPO = new MenuREPO(recimg,rectit,recct);
+                    Log.i("test", rectit);
+                    arrayList.add(menuREPO);
+                }
+            }
 
-        for (int i = 0; i < image.length; i++) {
-            MenuREPO menuREPO = new MenuREPO(image[i],title[i],price[i]);
-            arrayList.add(menuREPO);
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         recyclerviewadapter = new ChickenRecyclerviewadapter(getContext(), arrayList);
         trip_recyclerview.setAdapter(recyclerviewadapter);
     }
