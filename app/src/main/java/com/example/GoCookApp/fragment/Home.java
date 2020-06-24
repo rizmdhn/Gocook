@@ -31,7 +31,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
-public class Home extends Fragment {
+public class Home extends Fragment implements HomeRecyclerAdapter.RecyclerViewClickListener {
 
 
 
@@ -126,4 +126,10 @@ public class Home extends Fragment {
 
 
     }
+
+    @Override
+    public void recyclerViewListClicked(View v, int position) {
+
+    }
+
 }

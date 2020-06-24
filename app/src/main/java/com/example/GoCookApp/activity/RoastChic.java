@@ -21,7 +21,7 @@ public class RoastChic extends AppCompatActivity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RoastChic.this, MasterActivity.class));
+                finish();
             }
         });
 

@@ -1,4 +1,4 @@
-package com.example.GoCookApp.REPO;
+ package com.example.GoCookApp.REPO;
 
 public class MenuREPO {
 
@@ -35,4 +35,5 @@ public class MenuREPO {
     public void setPrice(String price) {
         this.price = price;
     }
+
 }

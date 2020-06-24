@@ -20,9 +20,9 @@ public class NachoActivity extends AppCompatActivity {
         ImageView img = findViewById(R.id.backbutton);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(NachoActivity.this, MasterActivity.class));
-            }
+                public void onClick(View view) {
+                    finish();
+                }
         });
 
     }

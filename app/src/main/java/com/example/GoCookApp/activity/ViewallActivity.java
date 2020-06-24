@@ -46,7 +46,7 @@ public class ViewallActivity extends AppCompatActivity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ViewallActivity.this, MasterActivity.class));
+            finish();
             }
         });
     }

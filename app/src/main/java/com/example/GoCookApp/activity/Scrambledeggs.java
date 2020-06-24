@@ -21,7 +21,7 @@ public class Scrambledeggs extends AppCompatActivity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Scrambledeggs.this, MasterActivity.class));
+            finish();
             }
         });
 

@@ -22,8 +22,9 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
 
     Context context;
     ArrayList<HomeREPO> list;
+    public static RecyclerViewClickListener recyclerViewClickListener;
 
-    public HomeRecyclerAdapter(Context context, ArrayList<HomeREPO> list) {
+    public HomeRecyclerAdapter(Context context, ArrayList<HomeREPO> list ) {
         this.context = context;
         this.list = list;
     }
@@ -40,7 +41,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
 
         HomeREPO homeREPO = list.get(i);
 
-        Picasso.with(context).load(homeREPO.getImages()).into(myViewHolder.imageView);
+        Picasso.with(context).load(homeREPO.getImages()).fit().centerCrop().into(myViewHolder.imageView);
         myViewHolder.title.setText(homeREPO.getTitles());
         myViewHolder.categories.setText(homeREPO.getCat());
         myViewHolder.cookt.setText(homeREPO.getCookt());
@@ -59,7 +60,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         return list.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView imageView;
         TextView title, categories, cookt;
@@ -71,7 +72,14 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
             imageView = itemView.findViewById(R.id.imageview);
             cookt = itemView.findViewById(R.id.cooktime);
         }
+
+        @Override
+        public void onClick(View v) {
+            recyclerViewClickListener.recyclerViewListClicked(v, this.getLayoutPosition());
+        }
     }
 
-
+    public interface RecyclerViewClickListener {
+        public void recyclerViewListClicked(View v, int position);
+    }
 }
