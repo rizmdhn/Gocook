@@ -31,7 +31,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
-public class Home extends Fragment implements HomeRecyclerAdapter.RecyclerViewClickListener {
+public class Home extends Fragment {
 
 
 
@@ -43,6 +43,7 @@ public class Home extends Fragment implements HomeRecyclerAdapter.RecyclerViewCl
     ArrayList<HomeREPO> arrayList;
     HomeRecyclerAdapter adapter;
     private RecyclerView recyclerview;
+    private HomeRecyclerAdapter.RecyclerViewClickListener listeners;
     private TextView search_layout;
     RoundedImageView egg,steak,snack;
 
@@ -86,10 +87,9 @@ public class Home extends Fragment implements HomeRecyclerAdapter.RecyclerViewCl
                     HomeREPO homeREPO = new HomeREPO(homeimage1.get(i).toString(), Title.get(i).toString(), Cat.get(i).toString(),Cookt.get(i).toString());
                     arrayList.add(homeREPO);
                 }
-
-                adapter = new HomeRecyclerAdapter(getContext(), arrayList);
+                adapter = new HomeRecyclerAdapter(getContext(), arrayList, listeners);
                 recyclerview.setAdapter(adapter);
-
+                setOnclickListener();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -127,9 +127,14 @@ public class Home extends Fragment implements HomeRecyclerAdapter.RecyclerViewCl
 
     }
 
-    @Override
-    public void recyclerViewListClicked(View v, int position) {
-
+    private void setOnclickListener() {
+        listeners = new HomeRecyclerAdapter.RecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, int adapterPosition) {
+                Intent intent = new Intent(getContext(), Steakactivity.class);
+                intent.putExtra("title", arrayList.get(adapterPosition).getTitles());
+                startActivity(intent);
+            }
+        };
     }
-
 }

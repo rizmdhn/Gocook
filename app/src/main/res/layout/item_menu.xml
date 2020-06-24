@@ -4,12 +4,17 @@
     android:layout_height="wrap_content"
     android:background="#ffffff">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="131.5dp"
         android:layout_margin="20dp"
         android:background="#ffffff"
         android:id="@+id/layoutini">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/testoverlay"
+            android:layout_width="match_parent"
+            android:layout_height="125dp" />
 
         <FrameLayout
             android:layout_width="90dp"
@@ -29,7 +34,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
@@ -41,7 +46,7 @@
                     android:id="@+id/trip_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="100dp"
                     android:fontFamily="@font/poppins_bold"
                     android:letterSpacing="-0.02"
                     android:lineSpacingExtra="6sp"
@@ -55,7 +60,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="100dp"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
@@ -73,7 +78,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8.4dp"
+                    android:layout_marginLeft="5dp"
                     android:letterSpacing="-0.01"
                     android:lineSpacingExtra="4sp"
                     android:text="Chef's Top Pick!"
@@ -101,11 +106,12 @@
                     android:textColor="#bec2ce"
                     android:textSize="14sp" />
 
+
                 <TextView
                     android:id="@+id/trip_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8.4dp"
+                    android:layout_marginLeft="60dp"
                     android:fontFamily="@font/poppins_bold"
                     android:letterSpacing="-0.01"
                     android:lineSpacingExtra="0sp"
@@ -113,16 +119,15 @@
                     android:textColor="#1f2533"
                     android:textSize="18sp" />
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="end"/>
+                    android:gravity="end" />
             </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </FrameLayout>
 
 </LinearLayout>

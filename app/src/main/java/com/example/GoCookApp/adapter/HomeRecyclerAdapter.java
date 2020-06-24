@@ -22,11 +22,12 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
 
     Context context;
     ArrayList<HomeREPO> list;
-    public static RecyclerViewClickListener recyclerViewClickListener;
+    private RecyclerViewClickListener recyclerViewClickListener;
 
-    public HomeRecyclerAdapter(Context context, ArrayList<HomeREPO> list ) {
+    public HomeRecyclerAdapter(Context context, ArrayList<HomeREPO> list, RecyclerViewClickListener recyclerViewClickListener) {
         this.context = context;
         this.list = list;
+        this.recyclerViewClickListener = recyclerViewClickListener;
     }
 
     @NonNull
@@ -37,9 +38,9 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int i) {
 
-        HomeREPO homeREPO = list.get(i);
+        final HomeREPO homeREPO = list.get(i);
 
         Picasso.with(context).load(homeREPO.getImages()).fit().centerCrop().into(myViewHolder.imageView);
         myViewHolder.title.setText(homeREPO.getTitles());
@@ -47,9 +48,10 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
         myViewHolder.cookt.setText(homeREPO.getCookt());
         myViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-                context.startActivity(new Intent(context, Steakactivity.class));
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Steakactivity.class);
+                intent.putExtra("title",homeREPO.getTitles());
+                context.startActivity(intent);
             }
         });
 
@@ -71,15 +73,16 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter<HomeRecyclerAdapte
             categories = itemView.findViewById(R.id.categories);
             imageView = itemView.findViewById(R.id.imageview);
             cookt = itemView.findViewById(R.id.cooktime);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            recyclerViewClickListener.recyclerViewListClicked(v, this.getLayoutPosition());
+            recyclerViewClickListener.onClick(v,  getAdapterPosition());
         }
     }
 
     public interface RecyclerViewClickListener {
-        public void recyclerViewListClicked(View v, int position);
+        void onClick(View view, int adapterPosition);
     }
 }
