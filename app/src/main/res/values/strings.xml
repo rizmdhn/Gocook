@@ -91,6 +91,9 @@ Hot sauce, for drizzling</string>
     <string name="email_address">Email Address</string>
     <string name="password">password</string>
     <string name="login_with_email">LOGIN</string>
+    <string name="edit">EDIT PROFILE</string>
+    <string name="submit">SUBMIT</string>
+    <string name="Your_name">Name</string>
     <string-array name="cate">
         <item>Lunch</item>
         <item>Breakfast</item>

@@ -32,14 +32,36 @@
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_centerHorizontal="true"
-        android:text="@string/email_address"
+        android:hint="@string/email_address"
         android:layout_below="@+id/text"
         android:inputType="textWebEmailAddress"
         />
     <EditText
+        android:visibility="invisible"
+        android:layout_marginTop="20dp"
+        android:id="@+id/nama"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/Your_name"
+        android:layout_below="@+id/text"
+        android:inputType="none"
+        />
+    <EditText
+        android:visibility="invisible"
+        android:layout_marginTop="20dp"
+        android:id="@+id/emailuser"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/email_address"
+        android:layout_below="@+id/nama"
+        android:inputType="none"
+        />
+    <EditText
         android:id="@+id/password"
         android:inputType="textPassword"
-        android:text="@string/password"
+        android:hint="@string/password"
         android:layout_centerHorizontal="true"
         android:layout_width="300dp"
         android:layout_height="70dp"
@@ -64,6 +86,29 @@
         android:layout_width="350dp"
         android:layout_marginBottom="30dp"
         android:text="@string/login_with_email"
+        android:background="@color/blue"
+        />
+    <Button
+        android:visibility="invisible"
+        android:id="@+id/btn_edit"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_width="350dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/edit"
+
+        android:background="@color/blue"
+        />
+    <Button
+        android:visibility="invisible"
+        android:id="@+id/btn_submitedit"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_width="350dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/submit"
         android:background="@color/blue"
         />
     <Button

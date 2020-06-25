@@ -3,11 +3,13 @@ package com.example.GoCookApp.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,6 +35,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -48,19 +52,63 @@ public class Profile extends AppCompatActivity {
     ImageView image;
     ProgressBar progressBar;
     GoogleSignInClient mGoogleSignInClient;
-
+    EditText emailtext, passtext, editemail, editnama;
+    Button login, edit, submitedit;
+    String names = null, emails = null, providerId = null, uid = null;
+    Uri photoUrl = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
-
+        login = findViewById(R.id.btn_login_email);
         btn_login = findViewById(R.id.btn_login);
         btn_logout = findViewById(R.id.btn_logout);
         text = findViewById(R.id.text);
         image = findViewById(R.id.image);
         progressBar = findViewById(R.id.progress_circular);
-
+        emailtext = findViewById(R.id.email);
+        passtext= findViewById(R.id.password);
         mAuth = FirebaseAuth.getInstance();
+        edit = findViewById(R.id.btn_edit);
+editemail = findViewById(R.id.emailuser);
+editnama = findViewById(R.id.nama);
+submitedit = findViewById(R.id.btn_submitedit);
+editnama.setFocusable(false);
+        editemail.setFocusable(false);
+
+        login.setOnClickListener(v -> {
+            String emailuser = emailtext.getText().toString();
+            String passuser = passtext.getText().toString();
+            Signin(emailuser,passuser);
+
+        });
+        edit.setOnClickListener(v ->{
+            editnama.setFocusableInTouchMode(true);
+            editnama.setInputType(InputType.TYPE_CLASS_TEXT);
+            edit.setEnabled(false);
+            submitedit.setVisibility(View.VISIBLE);
+        });
+        submitedit.setOnClickListener(v ->{
+            edit.setEnabled(true);
+            String nama_baru, photo_baru;
+            nama_baru = editnama.getText().toString();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(nama_baru)
+                    .build();
+            user.updateProfile(profileUpdates)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d("TAG", "User profile updated.");
+                                submitedit.setVisibility(View.INVISIBLE);
+                                editnama.setFocusable(false);
+                                editemail.setFocusable(false);
+                            }
+                        }
+                    });
+        });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -130,28 +178,73 @@ public class Profile extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            String photo = String.valueOf(user.getPhotoUrl());
 
-            text.append("Info : \n");
-            text.append(name + "\n");
-            text.append(email);
-            Picasso.with(getBaseContext()).load(photo).into(image);
+            for (UserInfo profile : user.getProviderData()) {
+                // Id of the provider (ex: google.com)
+                providerId = profile.getProviderId();
+
+                // UID specific to the provider
+                uid = profile.getUid();
+
+                // Name, email address, and profile photo Url
+                names = profile.getDisplayName();
+                emails = profile.getEmail();
+                photoUrl = profile.getPhotoUrl();
+            }
+            text.setText("User Info : \n");
+            editnama.setText(names);
+            editemail.setText(emails);
+            Picasso.with(getBaseContext()).load(photoUrl).into(image);
+            editemail.setVisibility(View.VISIBLE);
+            editnama.setVisibility(View.VISIBLE);
             btn_logout.setVisibility(View.VISIBLE);
             btn_login.setVisibility(View.INVISIBLE);
+            emailtext.setVisibility(View.INVISIBLE);
+            passtext.setVisibility(View.INVISIBLE);
+            login.setVisibility(View.INVISIBLE);
+            edit.setVisibility(View.VISIBLE);
         } else {
             text.setText("Firebase Login \n");
             Picasso.with(getBaseContext()).load(R.drawable.gocooktest).into(image);
+            editemail.setVisibility(View.INVISIBLE);
+            editnama.setVisibility(View.INVISIBLE);
             btn_logout.setVisibility(View.INVISIBLE);
             btn_login.setVisibility(View.VISIBLE);
+            emailtext.setVisibility(View.VISIBLE);
+            passtext.setVisibility(View.VISIBLE);
+            login.setVisibility(View.VISIBLE);
+            edit.setVisibility(View.INVISIBLE);
+
         }
     }
+
 
     private void Logout() {
         FirebaseAuth.getInstance().signOut();
         mGoogleSignInClient.signOut().addOnCompleteListener(this,
                 task -> updateUI(null));
     }
+private void Signin (String email, String password) {
+    mAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d("TAG", "signInWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        updateUI(user);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w("TAG", "signInWithEmail:failure", task.getException());
+                        Toast.makeText(Profile.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+                        updateUI(null);
+                        // ...
+                    }
 
+                    // ...
+                }
+            });
+        }
 }
