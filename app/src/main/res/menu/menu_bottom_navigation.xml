@@ -10,6 +10,10 @@
         android:id="@+id/navigation_cat"
         android:icon="@drawable/ic_view_list_black_24dp"
         android:title="Categories" />
+    <item
+        android:id="@+id/navigation_prof"
+        android:icon="@drawable/profilenav"
+        android:title="Profile" />
 
 
 
