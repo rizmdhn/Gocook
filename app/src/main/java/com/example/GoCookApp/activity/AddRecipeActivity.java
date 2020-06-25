@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.TimeUtils;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -39,6 +40,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.GoCookApp.R;
 
+import java.util.Date;
+
 public class AddRecipeActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private Button mButtonChooseImage;
@@ -62,7 +65,7 @@ public class AddRecipeActivity extends AppCompatActivity {
 
 
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("/foodimg");
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads/" + new Date().getTime());
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("cobadeh");
         mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +107,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.putExtra("filename", getFilesDir().getName());
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
     @Override
@@ -112,6 +116,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
+            Log.i("TAG", data.getData().toString());
             Picasso.with(this).load(mImageUri).into(mImageView);
         }
     }
@@ -143,6 +148,7 @@ public class AddRecipeActivity extends AppCompatActivity {
                                 downloadUri.toString());
 
                         mDatabaseRef.push().setValue(upload);
+                        finish();
                     } else {
                         Toast.makeText(AddRecipeActivity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }

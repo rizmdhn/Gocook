@@ -21,9 +21,9 @@
         <activity android:name="com.example.GoCookApp.activity.menulist.SnackMenuActivity"></activity>
         <activity android:name=".activity.ViewallActivity"/>
         <activity android:name=".activity.NachoActivity"/>
-
         <activity android:name="com.example.GoCookApp.fragment.CategoriesFragment" />
-        <activity android:name=".activity.AddRecipeActivity">
+        <activity android:name="com.example.GoCookApp.activity.Profile" />
+        <activity android:name=".activity.MasterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
