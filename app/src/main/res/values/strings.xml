@@ -86,4 +86,11 @@ Hot sauce, for drizzling</string>
 4. Bake until cheese is melty, 15 minutes.\n
 5. Scatter with tomato, avocado, green onions, and cilantro. Drizzle with sour cream and hot sauce and serve immediately.
     </string>
+    <string-array name="cate">
+        <item>Lunch</item>
+        <item>Breakfast</item>
+        <item>Dessert</item>
+        <item>Snacks</item>
+
+    </string-array>
 </resources>

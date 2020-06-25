@@ -14,5 +14,8 @@
         <item name="colorControlNormal">@color/yellow</item>
         <item name="colorControlActivated">#e8a31f</item>
     </style>
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/white</item>
+    </style>
 
 </resources>

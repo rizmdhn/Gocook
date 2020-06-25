@@ -3,6 +3,7 @@
     package="com.example.GoCookApp"
     >
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -20,8 +21,9 @@
         <activity android:name="com.example.GoCookApp.activity.menulist.SnackMenuActivity"></activity>
         <activity android:name=".activity.ViewallActivity"/>
         <activity android:name=".activity.NachoActivity"/>
+
         <activity android:name="com.example.GoCookApp.fragment.CategoriesFragment" />
-        <activity android:name=".activity.MasterActivity">
+        <activity android:name=".activity.AddRecipeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
