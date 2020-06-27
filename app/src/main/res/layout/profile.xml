@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -67,16 +68,25 @@
         android:layout_height="70dp"
         android:layout_below="@+id/email"
         />
+    <TextView
+        android:id="@+id/registerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password"
+        android:text="Dont Have Account ? Register"
+android:gravity="center_horizontal"
+        android:textColor="@color/blue"
+        />
 
     <ProgressBar
         android:visibility="invisible"
         android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
         android:scrollbarSize="10dp"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         />
     <Button
         android:id="@+id/btn_login_email"

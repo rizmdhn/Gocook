@@ -60,9 +60,6 @@ public class AddRecipeActivity extends AppCompatActivity implements AdapterView.
         mCookTime = findViewById(R.id.cooktimeid);
         mServings = findViewById(R.id.servingsid);
         mImageView = findViewById(R.id.image_view);
-
-
-
         mStorageRef = FirebaseStorage.getInstance().getReference("foodimg"+ UUID.randomUUID());
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("cobadeh");
         mButtonChooseImage.setOnClickListener(new View.OnClickListener() {

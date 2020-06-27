@@ -94,6 +94,7 @@ Hot sauce, for drizzling</string>
     <string name="edit">EDIT PROFILE</string>
     <string name="submit">SUBMIT</string>
     <string name="Your_name">Name</string>
+    <string name="upload_photo">Upload Photo</string>
     <string-array name="cate">
         <item>Lunch</item>
         <item>Breakfast</item>

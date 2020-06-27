@@ -25,7 +25,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,7 +47,7 @@ public class Profile extends AppCompatActivity {
     static final int GOOGLE_SIGN_IN = 123;
     FirebaseAuth mAuth;
     Button btn_login, btn_logout;
-    TextView text;
+    TextView text, register;
     ImageView image;
     ProgressBar progressBar;
     GoogleSignInClient mGoogleSignInClient;
@@ -76,10 +75,24 @@ submitedit = findViewById(R.id.btn_submitedit);
 editnama.setFocusable(false);
         editemail.setFocusable(false);
 
+        register = findViewById(R.id.registerText);
+        register.setOnClickListener(v->{
+            Intent intent = new Intent(Profile.this, RegisterActivity.class);
+            startActivity(intent);
+        });
         login.setOnClickListener(v -> {
             String emailuser = emailtext.getText().toString();
             String passuser = passtext.getText().toString();
-            Signin(emailuser,passuser);
+            if (emailuser.equals("")){
+                Toast.makeText(this, "Please input Your Email", Toast.LENGTH_SHORT).show();
+            }else{
+                if (passuser.equals("") ){
+                    Toast.makeText(this, "Please input Your Password", Toast.LENGTH_SHORT).show();
+                }else{
+                    Signin(emailuser, passuser);
+                }
+            }
+
 
         });
         edit.setOnClickListener(v ->{
@@ -122,9 +135,18 @@ editnama.setFocusable(false);
         btn_logout.setOnClickListener(v -> Logout());
 
         if (mAuth.getCurrentUser() != null) {
-            FirebaseUser user = mAuth.getCurrentUser();
-            updateUI(user);
+            Intent intent = new Intent(Profile.this, ProfileFinalActivity.class);
+            startActivity(intent);
+        }else{
+
         }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(Profile.this, MasterActivity.class);
+        startActivity(intent);
     }
 
     public void SignInGoogle() {
@@ -145,9 +167,8 @@ editnama.setFocusable(false);
                             progressBar.setVisibility(View.INVISIBLE);
 
                             Log.d("TAG", "signInWithCredential:success");
-
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Profile.this.updateUI(user);
+                            Intent intent = new Intent(Profile.this, ProfileFinalActivity.class);
+                            startActivity(intent);
                         } else {
                             progressBar.setVisibility(View.INVISIBLE);
 
@@ -155,7 +176,6 @@ editnama.setFocusable(false);
 
                             Toast.makeText(Profile.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            Profile.this.updateUI(null);
                         }
                     }
                 });
@@ -168,15 +188,15 @@ editnama.setFocusable(false);
         if (requestCode == GOOGLE_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
+                GoogleSignInAccount account = task.getResult();
                 if (account != null) firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
+            } catch (Exception e) {
                 Log.w("TAG", "Google sign in failed", e);
             }
         }
     }
 
-    private void updateUI(FirebaseUser user) {
+  /*  private void updateUI(FirebaseUser user) {
         if (user != null) {
 
             for (UserInfo profile : user.getProviderData()) {
@@ -216,13 +236,13 @@ editnama.setFocusable(false);
             edit.setVisibility(View.INVISIBLE);
 
         }
-    }
+    }*/
 
 
     private void Logout() {
         FirebaseAuth.getInstance().signOut();
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                task -> updateUI(null));
+      //  mGoogleSignInClient.signOut().addOnCompleteListener(this,
+            //    task -> updateUI(null));
     }
 private void Signin (String email, String password) {
     mAuth.signInWithEmailAndPassword(email, password)
@@ -233,13 +253,16 @@ private void Signin (String email, String password) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("TAG", "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(user);
+                        Intent intent = new Intent(Profile.this, ProfileFinalActivity.class);
+                        startActivity(intent);
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("TAG", "signInWithEmail:failure", task.getException());
                         Toast.makeText(Profile.this, "Authentication failed.",
                                 Toast.LENGTH_SHORT).show();
-                        updateUI(null);
+                        emailtext.setText(null);
+                        passtext.setText(null);
+                        //updateUI(null);
                         // ...
                     }
 

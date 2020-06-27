@@ -23,6 +23,8 @@
         <activity android:name=".activity.NachoActivity"/>
         <activity android:name="com.example.GoCookApp.fragment.CategoriesFragment" />
         <activity android:name="com.example.GoCookApp.activity.Profile" />
+        <activity android:name="com.example.GoCookApp.activity.RegisterActivity" />
+        <activity android:name=".activity.ProfileFinalActivity"/>
         <activity android:name=".activity.MasterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
