@@ -47,7 +47,7 @@ public class Profile extends AppCompatActivity {
     static final int GOOGLE_SIGN_IN = 123;
     FirebaseAuth mAuth;
     Button btn_login, btn_logout;
-    TextView text, register;
+    TextView text, register, forgot;
     ImageView image;
     ProgressBar progressBar;
     GoogleSignInClient mGoogleSignInClient;
@@ -72,6 +72,7 @@ public class Profile extends AppCompatActivity {
 editemail = findViewById(R.id.emailuser);
 editnama = findViewById(R.id.nama);
 submitedit = findViewById(R.id.btn_submitedit);
+forgot = findViewById(R.id.forgot);
 editnama.setFocusable(false);
         editemail.setFocusable(false);
 
@@ -79,6 +80,7 @@ editnama.setFocusable(false);
         register.setOnClickListener(v->{
             Intent intent = new Intent(Profile.this, RegisterActivity.class);
             startActivity(intent);
+            finish();
         });
         login.setOnClickListener(v -> {
             String emailuser = emailtext.getText().toString();
@@ -102,7 +104,21 @@ editnama.setFocusable(false);
             submitedit.setVisibility(View.VISIBLE);
         });
         submitedit.setOnClickListener(v ->{
-            edit.setEnabled(true);
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            String emailAddress = emailtext.getText().toString();
+
+            auth.sendPasswordResetEmail(emailAddress)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(Profile.this, "an mail has been sent to your email", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Profile.this, Profile.class);
+                                startActivity(intent);
+                            finish();}
+                        }
+                    });
+           /* edit.setEnabled(true);
             String nama_baru, photo_baru;
             nama_baru = editnama.getText().toString();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -120,12 +136,13 @@ editnama.setFocusable(false);
                                 editemail.setFocusable(false);
                             }
                         }
-                    });
+                    });*/
         });
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
+                .requestProfile()
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -137,9 +154,20 @@ editnama.setFocusable(false);
         if (mAuth.getCurrentUser() != null) {
             Intent intent = new Intent(Profile.this, ProfileFinalActivity.class);
             startActivity(intent);
+            finish();
         }else{
 
         }
+
+        forgot.setOnClickListener(v->{
+            submitedit.setVisibility(View.VISIBLE);
+            passtext.setVisibility(View.INVISIBLE);
+           text.setText("Reset Password");
+           btn_login.setVisibility(View.INVISIBLE);
+           login.setVisibility(View.INVISIBLE);
+           forgot.setVisibility(View.INVISIBLE);
+           register.setVisibility(View.INVISIBLE);
+        });
     }
 
     @Override
@@ -147,6 +175,7 @@ editnama.setFocusable(false);
     {
         Intent intent = new Intent(Profile.this, MasterActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void SignInGoogle() {
@@ -169,6 +198,7 @@ editnama.setFocusable(false);
                             Log.d("TAG", "signInWithCredential:success");
                             Intent intent = new Intent(Profile.this, ProfileFinalActivity.class);
                             startActivity(intent);
+                            finish();
                         } else {
                             progressBar.setVisibility(View.INVISIBLE);
 
@@ -255,6 +285,7 @@ private void Signin (String email, String password) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         Intent intent = new Intent(Profile.this, ProfileFinalActivity.class);
                         startActivity(intent);
+                        finish();
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("TAG", "signInWithEmail:failure", task.getException());

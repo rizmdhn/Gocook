@@ -40,6 +40,7 @@ import java.util.UUID;
 public class ProfileFinalActivity extends AppCompatActivity {
     static final int GOOGLE_SIGN_IN = 123;
     FirebaseAuth mAuth;
+    FirebaseUser user;
     Button btn_login, btn_logout;
     TextView text;
     ImageView image;
@@ -47,16 +48,12 @@ public class ProfileFinalActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     EditText emailtext, passtext, editemail, editnama;
     Button addrecipe, edit, submitedit, uploadphoto;
-    String names = null, emails = null, providerId = null, uid = null;
-    Uri photoUrl = null;
-    Uri downloadUri = null;
     private Uri mImageUri;
     private StorageReference mStorageRef;
     private static final int PICK_IMAGE_REQUEST = 1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_profilefinal);
         btn_logout = findViewById(R.id.logoutbtnid);
         edit = findViewById(R.id.editprofileid);
@@ -68,16 +65,17 @@ public class ProfileFinalActivity extends AppCompatActivity {
         image = findViewById(R.id.imageid);
         uploadphoto = findViewById(R.id.upload);
         addrecipe = findViewById(R.id.addrecipebtnid);
-        editnama.setFocusable(false);
-        editemail.setFocusable(false);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        mStorageRef = FirebaseStorage.getInstance().getReference("Users/" + user.getUid() + "/" + "profilepicture");
         if (user != null) {
             String name = user.getDisplayName();
             String email = user.getEmail();
             Uri photo = user.getPhotoUrl();
             editemail.setText(email);
             editnama.setText(name);
-            Picasso.with(getBaseContext()).load(photo).fit().into(image);
+            Picasso.with(getBaseContext()).load(photo).into(image);
+            Log.i("tag", name +"   "+ email +" " + photo);
         } else {
             Intent intent = new Intent(ProfileFinalActivity.this,Profile.class);
             startActivity(intent);
@@ -85,6 +83,10 @@ public class ProfileFinalActivity extends AppCompatActivity {
 
         image = findViewById(R.id.imageid);
 
+        addrecipe.setOnClickListener(v->{
+            Intent intent = new Intent(ProfileFinalActivity.this,AddRecipeActivity.class);
+            startActivity(intent);
+        });
 
         edit.setOnClickListener(v -> {
             submitedit.setVisibility(View.VISIBLE);
@@ -96,33 +98,47 @@ public class ProfileFinalActivity extends AppCompatActivity {
         });
         submitedit.setOnClickListener(v -> {
             edit.setEnabled(true);
-            String nama_baru;
-            nama_baru = editnama.getText().toString();
-            FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(nama_baru)
-                    .setPhotoUri(mImageUri)
-                    .build();
-            user1.updateProfile(profileUpdates)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d("TAG", "User profile updated.");
-                                submitedit.setVisibility(View.INVISIBLE);
-                                editnama.setFocusable(false);
-                                editemail.setFocusable(false);
-                                Intent intent = new Intent(ProfileFinalActivity.this , ProfileFinalActivity.class);
-                                startActivity(intent);
-                            }
-                        }
-                    });
+            mStorageRef.putFile(mImageUri).continueWithTask(task -> {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+                return mStorageRef.getDownloadUrl();
+            }).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Log.i("TAG", task.getResult().toString());
+                    Uri downloadUri = task.getResult();
+                    Log.i("TAG", "then: " + downloadUri.toString());
+                    String nama_baru;
+                    nama_baru = editnama.getText().toString();
+                    FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(nama_baru)
+                            .setPhotoUri(downloadUri)
+                            .build();
+                    user1.updateProfile(profileUpdates)
+                            .addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    Log.i("TAG", "User profile updated.");
+                                    submitedit.setVisibility(View.INVISIBLE);
+                                    editnama.setFocusable(false);
+                                    editemail.setFocusable(false);
+                                    Intent intent = new Intent(ProfileFinalActivity.this,ProfileFinalActivity.class);
+                                    startActivity(intent);
+                                } else{
+                                    Log.i("TAG", "error");
+                                }
+                            });
 
+                }else{
+                    Toast.makeText(this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
         addrecipe.setOnClickListener(v->{
             Intent intent = new Intent(ProfileFinalActivity.this , AddRecipeActivity.class);
             startActivity(intent);
         });
+
         btn_logout.setOnClickListener(v -> Logout());
     }
 
@@ -131,60 +147,13 @@ public class ProfileFinalActivity extends AppCompatActivity {
         startActivity(new Intent(ProfileFinalActivity.this, MasterActivity.class));
     }
 
-    private void updateUI(FirebaseUser user) {
-        if (user != null) {
-
-            for (UserInfo profile : user.getProviderData()) {
-                // Id of the provider (ex: google.com)
-                providerId = profile.getProviderId();
-
-                // UID specific to the provider
-                uid = profile.getUid();
-
-                // Name, email address, and profile photo Url
-                names = profile.getDisplayName();
-                emails = profile.getEmail();
-                photoUrl = profile.getPhotoUrl();
-            }
-            editnama.setText(names);
-            editemail.setText(emails);
-            Picasso.with(getBaseContext()).load(photoUrl).into(image);
-
-        } else {
-            Intent intent = new Intent(ProfileFinalActivity.this,Profile.class);
-            startActivity(intent);
-
-        }
-    }
 
     private void Logout() {
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(ProfileFinalActivity.this, Profile.class);
         startActivity(intent);
     }
-    private void Signin (String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("TAG", "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("TAG", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(ProfileFinalActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                            // ...
-                        }
 
-                        // ...
-                    }
-                });
-    }
     private void openFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -200,4 +169,6 @@ public class ProfileFinalActivity extends AppCompatActivity {
             Picasso.with(this).load(mImageUri).centerCrop().resize(120,120).into(image);
         }
     }
+
+
 }

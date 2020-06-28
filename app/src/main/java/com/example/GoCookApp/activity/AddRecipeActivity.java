@@ -1,12 +1,11 @@
 package com.example.GoCookApp.activity;
 
-import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,7 +16,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.GoCookApp.REPO.GeneralInfoREPO;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationHolder;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
+import com.basgeekball.awesomevalidation.utility.custom.CustomValidation;
+import com.example.GoCookApp.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,11 +35,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.GoCookApp.R;
 
 import java.util.UUID;
 
@@ -49,11 +51,14 @@ public class AddRecipeActivity extends AppCompatActivity implements AdapterView.
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     private StorageTask mUploadTask;
+    private AwesomeValidation awesomeValidation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addrecipe);
         mButtonChooseImage = findViewById(R.id.buttonchoose);
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
         mButtonUpload = findViewById(R.id.nextbtninfoid);
         mEditTextFileName = findViewById(R.id.recipetitleid);
         mPrepTime = findViewById(R.id.preptimeid);
@@ -62,20 +67,43 @@ public class AddRecipeActivity extends AppCompatActivity implements AdapterView.
         mImageView = findViewById(R.id.image_view);
         mStorageRef = FirebaseStorage.getInstance().getReference("foodimg"+ UUID.randomUUID());
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("cobadeh");
-        mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
+        String regexmax = ".{30,}";
+        awesomeValidation.addValidation(this, R.id.recipetitleid, "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", R.string.titleerror);
+        awesomeValidation.addValidation(this, R.id.recipetitleid, RegexTemplate.NOT_EMPTY, R.string.titleerror);
+
+        awesomeValidation.addValidation(this, R.id.preptimeid, RegexTemplate.NOT_EMPTY, R.string.prepterror);
+
+        awesomeValidation.addValidation(this, R.id.cooktimeid, RegexTemplate.NOT_EMPTY, R.string.cookterror);
+        awesomeValidation.addValidation(this, R.id.servingsid, RegexTemplate.NOT_EMPTY, R.string.servingserror);
+        awesomeValidation.addValidation(this, R.id.image_view, RegexTemplate.NOT_EMPTY, R.string.imageerror);
+        awesomeValidation.addValidation(this, R.id.spinner1, new CustomValidation() {
             @Override
-            public void onClick(View v) {
-                openFileChooser();
-            }
-        });
-        mButtonUpload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(AddRecipeActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
+            public boolean compare(ValidationHolder validationHolder) {
+                if (((Spinner) validationHolder.getView()).getSelectedItem().toString().equals("")) {
+                    return false;
                 } else {
-                    uploadFile();
+                    return true;
                 }
+            }
+        }, validationHolder -> {
+            TextView textViewError = (TextView) ((Spinner) validationHolder.getView()).getSelectedView();
+            textViewError.setError(validationHolder.getErrMsg());
+            textViewError.setTextColor(Color.RED);
+        }, validationHolder -> {
+            TextView textViewError = (TextView) ((Spinner) validationHolder.getView()).getSelectedView();
+            textViewError.setError(null);
+            textViewError.setTextColor(Color.BLACK);
+        }, R.string.cateserror);
+
+
+
+        mButtonChooseImage.setOnClickListener(v -> openFileChooser());
+        mButtonUpload.setOnClickListener(v -> {
+            if (mUploadTask != null && mUploadTask.isInProgress()) {
+                Toast.makeText(AddRecipeActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
+            } else {
+                awesomeValidation.validate();
+                uploadFile();
             }
         });
 
@@ -114,18 +142,13 @@ public class AddRecipeActivity extends AppCompatActivity implements AdapterView.
         }
     }
 
-    private String getFileExtension(Uri uri) {
-        ContentResolver cR = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cR.getType(uri));
-    }
     private void uploadFile() {
         if (mImageUri != null) {
             mStorageRef.putFile(mImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                     if (!task.isSuccessful()) {
-                        throw task.getException();
+                        Toast.makeText(AddRecipeActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                     }
                     return mStorageRef.getDownloadUrl();
                 }
@@ -133,27 +156,39 @@ public class AddRecipeActivity extends AppCompatActivity implements AdapterView.
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
-                        Uri downloadUri = task.getResult();
+                       Uri downloadUri = task.getResult();
                         Log.e("TAG", "then: " + downloadUri.toString());
+                        if (downloadUri.toString().equals("")) {
 
+                            Toast.makeText(AddRecipeActivity.this, "please insert an image!", Toast.LENGTH_SHORT).show();
+
+                        }else{
+                            Intent intent = new Intent(AddRecipeActivity.this, AddRecipeIngreActivity.class);
+                            intent.putExtra("titlepass", mEditTextFileName.getText().toString());
+                            intent.putExtra("imagepass", downloadUri.toString());
+                            intent.putExtra("catepass", Categories);
+                            intent.putExtra("servpass", mServings.getText().toString());
+                            intent.putExtra("preppass", mPrepTime.getText().toString());
+                            intent.putExtra("cookpass", mCookTime.getText().toString());
+                            startActivity(intent);
+                        }
 
 //                        GeneralInfoREPO upload = new GeneralInfoREPO(mEditTextFileName.getText().toString().trim(),
 //                                downloadUri.toString(),Categories,mPrepTime.getText().toString(),mCookTime.getText().toString(),mServings.getText().toString());
-                        Intent intent = new Intent(AddRecipeActivity.this, AddRecipeIngreActivity.class);
-                        intent.putExtra("titlepass", mEditTextFileName.getText().toString());
-                        intent.putExtra("imagepass", downloadUri.toString());
-                        intent.putExtra("catepass", Categories);
-                        intent.putExtra("preppass", mPrepTime.getText().toString());
-                        intent.putExtra("cookpass", mCookTime.getText().toString());
-                        intent.putExtra("servpass", mServings.getText().toString());
-                        startActivity(intent);
-
 //                        mDatabaseRef.push().setValue(upload);
                     } else {
                         Toast.makeText(AddRecipeActivity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
+        }else{
+            Toast.makeText(AddRecipeActivity.this, "Please insert a Photo", Toast.LENGTH_SHORT).show();
+
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

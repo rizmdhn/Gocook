@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.example.GoCookApp.R;
 import com.example.GoCookApp.REPO.GeneralInfoREPO;
 
@@ -29,6 +31,7 @@ public class AddRecipeIngreActivity extends AppCompatActivity {
     public EditText i10;
     public EditText i11;
     public EditText i12;
+    AwesomeValidation awesomeValidation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,20 +43,7 @@ public class AddRecipeIngreActivity extends AppCompatActivity {
         String prepvalue = getIntent().getStringExtra("preppass");
         String cookvalue = getIntent().getStringExtra("cookpass");
         String servvalue = getIntent().getStringExtra("servpass");
-        final ArrayList geninfo = new ArrayList();
-        geninfo.add(titlevalue);
-        geninfo.add(imgvalue);
-        geninfo.add(catevalue);
-        geninfo.add(prepvalue);
-        geninfo.add(cookvalue);
-        geninfo.add(servvalue);
-        Log.i("ingredients","this is after intent get value");
-
-
-        final EditText i1 = (EditText) findViewById(R.id.ing1id);
-        final String text = i1.getText().toString();
-
-
+        EditText i1 = (EditText) findViewById(R.id.ing1id);
         i2 = findViewById(R.id.ing2id);
         i3 = findViewById(R.id.ing3id);
         i4 = findViewById(R.id.ing4id);
@@ -65,6 +55,20 @@ public class AddRecipeIngreActivity extends AppCompatActivity {
         i10 = findViewById(R.id.ing10id);
         i11 = findViewById(R.id.ing11id);
         i12 = findViewById(R.id.ing12id);
+
+        final ArrayList geninfo = new ArrayList();
+        geninfo.add(titlevalue);
+        geninfo.add(imgvalue);
+        geninfo.add(catevalue);
+        geninfo.add(prepvalue);
+        geninfo.add(cookvalue);
+        geninfo.add(servvalue);
+        Log.i("ingredients","this is after intent get value");
+
+
+        final String text = i1.getText().toString();
+
+
 
         final ArrayList inginfo = new ArrayList();
         inginfo.add(i1.getText().toString());
@@ -93,30 +97,37 @@ public class AddRecipeIngreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i("test",text);
-                Toast.makeText(AddRecipeIngreActivity.this, "thetext is =  " + i1.getText().toString(), Toast.LENGTH_SHORT).show();
+                if(i1.getText().toString().equals("")){
+                    Toast.makeText(AddRecipeIngreActivity.this, R.string.ingreserror, Toast.LENGTH_SHORT).show();
+            }else{
+                    final ArrayList inginfo = new ArrayList();
+                    inginfo.add(i1.getText().toString());
+                    inginfo.add(i2.getText().toString());
+                    inginfo.add(i3.getText().toString());
+                    inginfo.add(i4.getText().toString());
+                    inginfo.add(i5.getText().toString());
+                    inginfo.add(i6.getText().toString());
+                    inginfo.add(i7.getText().toString());
+                    inginfo.add(i8.getText().toString());
+                    inginfo.add(i9.getText().toString());
+                    inginfo.add(i10.getText().toString());
+                    inginfo.add(i11.getText().toString());
+                    inginfo.add(i12.getText().toString());
+                    Intent intentbos = new Intent(AddRecipeIngreActivity.this,AddRecipeStepActivity.class);
+                    intentbos.putExtra("generalinfo", geninfo);
+                    intentbos.putExtra("ingredients", inginfo);
 
-                final ArrayList inginfo = new ArrayList();
-                inginfo.add(i1.getText().toString());
-                inginfo.add(i2.getText().toString());
-                inginfo.add(i3.getText().toString());
-                inginfo.add(i4.getText().toString());
-                inginfo.add(i5.getText().toString());
-                inginfo.add(i6.getText().toString());
-                inginfo.add(i7.getText().toString());
-                inginfo.add(i8.getText().toString());
-                inginfo.add(i9.getText().toString());
-                inginfo.add(i10.getText().toString());
-                inginfo.add(i11.getText().toString());
-                inginfo.add(i12.getText().toString());
-                Intent intentbos = new Intent(AddRecipeIngreActivity.this,AddRecipeStepActivity.class);
-                intentbos.putExtra("generalinfo", geninfo);
-                intentbos.putExtra("ingredients", inginfo);
+                    startActivity(intentbos);
+                    Log.i("inginfo", inginfo.get(1).toString());
 
-                startActivity(intentbos);
-                Log.i("inginfo", inginfo.get(1).toString());
-
+                }
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

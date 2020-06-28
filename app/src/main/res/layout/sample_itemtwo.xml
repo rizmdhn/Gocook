@@ -36,7 +36,7 @@
             android:lineSpacingExtra="9sp"
             android:text="Lunch"
             android:textColor="#1e2432"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
 
     </LinearLayout>

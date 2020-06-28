@@ -34,6 +34,7 @@ public class MasterActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_prof:
                     startActivity(new Intent(getBaseContext(), Profile.class));
+                    finish();
 
             }
             return false;
@@ -58,5 +59,10 @@ public class MasterActivity extends AppCompatActivity {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

@@ -16,7 +16,6 @@
         android:scaleType="fitCenter"
         android:src="@drawable/gocooktest"
         />
-
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
@@ -27,6 +26,24 @@
         android:layout_below="@+id/image"
         android:gravity="center"
         />
+<RelativeLayout
+    android:layout_below="@+id/text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    >
+    <Button
+        android:visibility="invisible"
+        android:id="@+id/btn_submitedit"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/submit"
+        android:background="@color/blue"
+        />
+
     <EditText
         android:layout_marginTop="20dp"
         android:id="@+id/email"
@@ -34,7 +51,6 @@
         android:layout_height="70dp"
         android:layout_centerHorizontal="true"
         android:hint="@string/email_address"
-        android:layout_below="@+id/text"
         android:inputType="textWebEmailAddress"
         />
     <EditText
@@ -45,7 +61,6 @@
         android:layout_height="70dp"
         android:layout_centerHorizontal="true"
         android:hint="@string/Your_name"
-        android:layout_below="@+id/text"
         android:inputType="none"
         />
     <EditText
@@ -70,13 +85,24 @@
         />
     <TextView
         android:id="@+id/registerText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/forgot"
+        android:text="Dont Have Account ? Register"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/blue"
+        android:layout_marginTop="30dp"
+
+        />
+    <TextView
+        android:id="@+id/forgot"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/password"
-        android:text="Dont Have Account ? Register"
-android:gravity="center_horizontal"
+        android:text="FORGOT PASSWORD"
         android:textColor="@color/blue"
         />
+</RelativeLayout>
 
     <ProgressBar
         android:visibility="invisible"
@@ -110,17 +136,7 @@ android:gravity="center_horizontal"
 
         android:background="@color/blue"
         />
-    <Button
-        android:visibility="invisible"
-        android:id="@+id/btn_submitedit"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
-        android:layout_centerHorizontal="true"
-        android:layout_width="350dp"
-        android:layout_marginBottom="30dp"
-        android:text="@string/submit"
-        android:background="@color/blue"
-        />
+
     <Button
         android:id="@+id/btn_login"
         android:layout_height="wrap_content"

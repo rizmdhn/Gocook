@@ -44,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (user != null) {
             Intent intent = new Intent(RegisterActivity.this, Profile.class);
             startActivity(intent);
+            finish();
         } else {
             // No user is signed in
         };
@@ -56,6 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this, Profile.class);
                 startActivity(intent);
+                finish();
             }
         });
 

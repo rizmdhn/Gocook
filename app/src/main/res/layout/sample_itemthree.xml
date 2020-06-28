@@ -22,8 +22,10 @@
             android:layout_width="175dp"
             android:layout_height="175dp"
             android:scaleType="fitXY"
-            android:src="@drawable/roastedchic"
-            app:riv_corner_radius="8dp"/>
+            android:src="@drawable/dessert"
+            app:riv_corner_radius="8dp"
+
+            />
 
 
 

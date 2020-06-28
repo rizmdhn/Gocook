@@ -18,12 +18,16 @@
         <activity android:name="com.example.GoCookApp.activity.menulist.BreakfastMenuActivity"></activity>
         <activity android:name="com.example.GoCookApp.activity.menulist.LunchMenuActivity"></activity>
         <activity android:name="com.example.GoCookApp.activity.menulist.DinnerMenuActivity"></activity>
+        <activity android:name="com.example.GoCookApp.activity.menulist.ViewallActivity"></activity>
         <activity android:name="com.example.GoCookApp.activity.menulist.SnackMenuActivity"></activity>
-        <activity android:name=".activity.ViewallActivity"/>
         <activity android:name=".activity.NachoActivity"/>
         <activity android:name="com.example.GoCookApp.fragment.CategoriesFragment" />
         <activity android:name="com.example.GoCookApp.activity.Profile" />
         <activity android:name="com.example.GoCookApp.activity.RegisterActivity" />
+        <activity android:name="com.example.GoCookApp.activity.AddRecipeActivity" />
+        <activity android:name="com.example.GoCookApp.activity.AddRecipeIngreActivity" />
+        <activity android:name="com.example.GoCookApp.activity.AddRecipeStepActivity" />
+
         <activity android:name=".activity.ProfileFinalActivity"/>
         <activity android:name=".activity.MasterActivity">
             <intent-filter>

@@ -2,7 +2,6 @@ package com.example.GoCookApp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,7 @@ import com.example.GoCookApp.REPO.HomeREPO;
 import com.example.GoCookApp.activity.NachoActivity;
 import com.example.GoCookApp.activity.Scrambledeggs;
 import com.example.GoCookApp.activity.Steakactivity;
-import com.example.GoCookApp.activity.ViewallActivity;
+import com.example.GoCookApp.activity.menulist.ViewallActivity;
 import com.example.GoCookApp.adapter.HomeRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

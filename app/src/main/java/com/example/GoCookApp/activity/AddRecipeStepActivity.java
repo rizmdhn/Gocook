@@ -53,6 +53,9 @@ public class AddRecipeStepActivity extends AppCompatActivity {
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(s1.getText().toString().equals("")){
+                    Toast.makeText(AddRecipeStepActivity.this, R.string.stepserror, Toast.LENGTH_SHORT).show();
+                }else{
                 final ArrayList stepinfo = new ArrayList();
                 stepinfo.add(s1.getText().toString());
                 stepinfo.add(s2.getText().toString());
@@ -71,10 +74,18 @@ public class AddRecipeStepActivity extends AppCompatActivity {
                         generalinfopage1.get(2).toString(),generalinfopage1.get(3).toString(),generalinfopage1.get(4).toString(),
                         inggpage2,stepinfo,generalinfopage1.get(5).toString());
                 mDatabaseRef.push().setValue(upload);
-                Toast.makeText(AddRecipeStepActivity.this, "Upload Success: ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddRecipeStepActivity.this, "Upload Success" , Toast.LENGTH_SHORT).show();
+                Intent home = new Intent(AddRecipeStepActivity.this, MasterActivity.class);
+                startActivity(home);
 
+            }
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

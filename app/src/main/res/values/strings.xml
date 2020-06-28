@@ -102,4 +102,17 @@ Hot sauce, for drizzling</string>
         <item>Snacks</item>
 
     </string-array>
+
+
+    <string name="titleerror">Enter a valid title</string>
+    <string name="titleerrorlength">Max 30 characters</string>
+    <string name="cookterror">Enter a valid cook time</string>
+    <string name="prepterror">Enter a valid preparation time</string>
+    <string name="imageerror">choose an image</string>
+    <string name="servingserror">Enter a valid servings</string>
+    <string name="ingreserror">please input atleast 1 ingredient</string>
+    <string name="stepserror">please input atleast 1 step</string>
+    <string name="cateserror">Enter a valid categories</string>
+
+
 </resources>
